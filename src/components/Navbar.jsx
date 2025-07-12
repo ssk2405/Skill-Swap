@@ -25,12 +25,20 @@ const Navbar = () => {
         )}
 
         {user && (
-          <>
-            <Link to="/swaps" className="hover:underline">Swaps</Link>
-            <Link to="/edit-profile" className="hover:underline">Profile</Link>
-            <button onClick={handleLogout} className="hover:underline">Logout</button>
-          </>
-        )}
+  <>
+    <Link to="/swaps" className="hover:underline">Swaps</Link>
+    <Link to="/edit-profile" className="hover:underline">Profile</Link>
+    <button onClick={handleLogout} className="hover:underline">Logout</button>
+
+    {user.photoURL && (
+      <img
+        src={user.photoURL}
+        alt="avatar"
+        className="w-10 h-10 rounded-full ml-2 border"
+      />
+    )}
+  </>
+)}
       </div>
     </nav>
   );

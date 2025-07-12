@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
       profilePhoto: "",
       isPublic: true,
       role: "user",
+      photoURL: userDoc.data().photoURL || "",
     });
   };
 

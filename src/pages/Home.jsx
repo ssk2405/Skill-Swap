@@ -11,20 +11,22 @@ const HomePage = () => {
   const [availability, setAvailability] = useState("");
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, "users"));
-        const userData = snapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((u) => u.skills?.length > 0 && u.isPublic !== false && u.id !== user?.uid);
-        setUsers(userData);
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      }
-    };
+  const fetchUsers = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, "users"));
+      const userData = snapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((u) => 
+          u.isPublic !== false && u.id !== user?.uid
+        );
+      setUsers(userData);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
+  };
 
-    fetchUsers();
-  }, [user]);
+  fetchUsers();
+}, [user]);
 
   const handleSwapRequest = async (targetUser) => {
     if (!user) return alert("Please log in first");
@@ -112,27 +114,35 @@ const HomePage = () => {
                     Availability: {u.availability || "N/A"}
                   </p>
                   <div className="text-sm mt-2">
-                    <span className="text-green-400">Skills Offered:</span>
-                    {u.skills?.map((skill) => (
-                      <span
-                        key={skill}
-                        className="inline-block border rounded px-2 py-1 mx-1"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="text-sm mt-1">
-                    <span className="text-blue-400">Skills Wanted:</span>
-                    {u.lookingFor?.map((skill) => (
-                      <span
-                        key={skill}
-                        className="inline-block border rounded px-2 py-1 mx-1"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+  <span className="text-green-400">Skills Offered:</span>
+  {Array.isArray(u.skills) && u.skills.length > 0 ? (
+    u.skills.map((skill, i) => (
+      <span
+        key={i}
+        className="inline-block border rounded px-2 py-1 mx-1 bg-gray-800 text-white"
+      >
+        {skill}
+      </span>
+    ))
+  ) : (
+    <span className="text-gray-400 ml-2">None listed</span>
+  )}
+</div>
+<div className="text-sm mt-1">
+  <span className="text-blue-400">Skills Wanted:</span>
+  {Array.isArray(u.lookingFor) && u.lookingFor.length > 0 ? (
+    u.lookingFor.map((skill, i) => (
+      <span
+        key={i}
+        className="inline-block border rounded px-2 py-1 mx-1 bg-gray-800 text-white"
+      >
+        {skill}
+      </span>
+    ))
+  ) : (
+    <span className="text-gray-400 ml-2">None listed</span>
+  )}
+</div>
                 </div>
               </div>
               <div className="mt-4 sm:mt-0 text-center">
