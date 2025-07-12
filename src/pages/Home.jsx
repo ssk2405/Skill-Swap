@@ -167,17 +167,7 @@ const HomePage = () => {
         )}
       </div>
 
-      {/* Pagination (placeholder) */}
-      <div className="flex justify-center mt-10 space-x-2 text-lg">
-        {[1, 2, 3].map((n) => (
-          <button
-            key={n}
-            className="px-3 py-1 border border-white rounded hover:bg-white hover:text-black transition"
-          >
-            {n}
-          </button>
-        ))}
-      </div>
+      
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
 
 // ✅ Your Firebase config
 const firebaseConfig = {
@@ -17,11 +16,8 @@ const firebaseConfig = {
   measurementId: "G-758ZLYH2ZL"
 };
 
-
+// ✅ Initialize
 const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const storage = getStorage(app);
-
 const analytics = getAnalytics(app);
